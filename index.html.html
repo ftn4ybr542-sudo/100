@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта дня для сотрудников</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ftn4ybr542-sudo/100/main/photo_2025-12-19_14-57-50-Photoroom.png" alt="Карта дня для сотрудников">
+                <h1>Карта дня для сотрудников</h1>
+            </div>
+            
+            <div class="header-controls">
+                <div class="theme-switcher">
+                    <span>Новогодняя тема</span>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="user-info" id="userInfo">
+                    <!-- Информация о пользователе появится здесь -->
+                </div>
+                
+                <button class="logout-btn" id="logoutBtn" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> Выйти
+                </button>
+            </div>
+        </header>
+        
+        <div class="tab-container">
+            <div class="tab active" data-tab="main">Основная</div>
+            <div class="tab" data-tab="history">История</div>
+            <div class="tab" data-tab="achievements">Достижения</div>
+            <div class="tab" data-tab="mood">Настроение</div>
+            <div class="tab" data-tab="stats">Статистика</div>
+        </div>
+        
+        <!-- Основная вкладка -->
+        <div class="tab-content active" id="main-tab">
+            <div class="main-content">
+                <!-- Левая колонка - форма и колода -->
+                <div class="section">
+                    <h2 id="formTitle">Представьтесь, пожалуйста!</h2>
+                    
+                    <div id="nameForm">
+                        <div class="form-group">
+                            <label for="userName">Ваше имя:</label>
+                            <input type="text" id="userName" class="form-control" placeholder="Введите ваше имя (только кириллица)" pattern="[А-Яа-яЁё\s]+" required>
+                            <small class="form-text">Только русские буквы</small>
+                        </div>
+                        <button class="btn" id="continueBtn">
+                            <i class="fas fa-arrow-right"></i> Продолжить
+                        </button>
+                    </div>
+                    
+                    <div id="departmentForm" style="display: none;">
+                        <div class="form-group">
+                            <label for="department">Выберите ваше направление:</label>
+                            <select id="department" class="form-control">
+                                <option value="">-- Выберите направление --</option>
+                                <option value="Разработка">Разработка</option>
+                                <option value="Аналитика">Аналитика</option>
+                                <option value="Тестирование">Тестирование</option>
+                                <option value="DEVOPS">DEVOPS</option>
+                                <option value="Базы данных">Базы данных</option>
+                                <option value="Руководители проектов">Руководители проектов</option>
+                                <option value="Управление персоналом">Управление персоналом</option>
+                                <option value="Сопровождение">Сопровождение</option>
+                            </select>
+                        </div>
+                        <button class="btn" id="startBtn">
+                            <i class="fas fa-play"></i> Начать
+                        </button>
+                    </div>
+                    
+                    <div id="deckSection" style="display: none;">
+                        <div class="deck-container">
+                            <div class="deck-label">Нажми на колоду, чтобы вытянуть карту</div>
+                            <div class="deck" id="tarotDeck">
+                                <img src="https://raw.githubusercontent.com/ftn4ybr542-sudo/100/main/photo_2022-03-03_10-28-50%20(2).jpg" alt="Колода Таро">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Правая колонка - отображение карты -->
+                <div class="section">
+                    <h2>Твоя карта</h2>
+                    <div class="card-display">
+                        <div class="default-message" id="defaultMessage">
+                            Карта появится здесь после вытягивания
+                        </div>
+                        <div class="card-content" id="cardContent">
+                            <div class="card-header">
+                                <div class="card-name" id="cardName">Маг</div>
+                                <div class="card-type" id="cardType">Старший Аркан</div>
+                            </div>
+                            <div class="card-meaning">
+                                <strong>Значение:</strong> <span id="cardMeaning">Карта Мага символизирует волю, инициативу и творческое начало. Это знак того, что у вас есть все необходимые ресурсы для достижения цели.</span>
+                            </div>
+                            <div class="card-advice">
+                                <strong>Совет:</strong> <span id="cardAdvice">Сфокусируйтесь на своей цели и используйте все доступные инструменты. Вера в себя - ключ к успеху.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sharing-buttons" id="sharingButtons" style="display: none;">
+                        <button class="btn" id="shareBtn">
+                            <i class="fas fa-share-alt"></i> Поделиться
+                        </button>
+                        <button class="btn" id="saveBtn">
+                            <i class="fas fa-save"></i> Сохранить
+                        </button>
+                        <button class="btn" id="voiceBtn">
+                            <i class="fas fa-volume-up"></i> Озвучить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Вкладка истории -->
+        <div class="tab-content" id="history-tab">
+            <div class="section">
+                <h2>История предсказаний</h2>
+                <div class="history-container" id="historyContainer">
+                    <!-- История карт будет добавляться здесь динамически -->
+                    <div class="empty-history">Вы еще не вытягивали карты</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Вкладка достижений -->
+        <div class="tab-content" id="achievements-tab">
+            <div class="section">
+                <h2>Достижения</h2>
+                <div class="achievements-container" id="achievementsContainer">
+                    <!-- Достижения будут добавляться здесь динамически -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Вкладка календаря настроений -->
+        <div class="tab-content" id="mood-tab">
+            <div class="section">
+                <h2>Календарь настроений</h2>
+                <div class="mood-calendar" id="moodCalendar">
+                    <!-- Дни настроения будут добавляться здесь динамически -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Вкладка статистики -->
+        <div class="tab-content" id="stats-tab">
+            <div class="section">
+                <h2>Статистика</h2>
+                <div class="stats-grid" id="statsGrid">
+                    <!-- Статистика будет добавляться здесь динамически -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Аудио контролы -->
+        <div class="audio-controls">
+            <button class="btn" id="musicToggle">
+                <i class="fas fa-music"></i> <span id="musicStatus">Музыка Вкл</span>
+            </button>
+            <div class="volume-slider">
+                <label for="musicVolume">Громкость музыки:</label>
+                <input type="range" id="musicVolume" min="0" max="100" value="50">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для просмотра карты из истории -->
+    <div class="card-modal-overlay" id="cardModalOverlay">
+        <div class="card-modal" id="cardModal">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="card-modal-content" id="cardModalContent">
+                <!-- Содержимое карты будет добавляться здесь -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Видео оверлей -->
+    <div class="video-overlay" id="videoOverlay">
+        <div class="video-container">
+            <button class="close-video" id="closeVideo">
+                <i class="fas fa-times"></i>
+            </button>
+            <video id="officeVideo">
+                <source src="https://raw.githubusercontent.com/ftn4ybr542-sudo/100/main/%D0%9E%D1%84%D0%B8%D1%81.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+    </div>
+    
+    <!-- Оверлей ошибки -->
+    <div class="error-message" id="errorOverlay">
+        <h3>Упс...</h3>
+        <p>Кажется, ты уже получил свое предсказание...</p>
+        <div class="error-video-container">
+            <button class="close-error-video" id="closeErrorVideo">
+                <i class="fas fa-times"></i>
+            </button>
+            <video id="errorVideo">
+                <source src="https://raw.githubusercontent.com/ftn4ybr542-sudo/100/main/%D0%9E%D1%84%D0%B8%D1%81%202.0..MP4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Карта дня для сотрудников компании © 2023 | Используйте мудрость карт для вдохновения и мотивации</p>
+    </footer>
+    
+    <!-- Аудио элементы -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://github.com/ftn4ybr542-sudo/100/blob/main/7582948853_1_tiktok_6898857a48e532_72305419.mp3?raw=true" type="audio/mpeg">
+    </audio>
+    <script src="script.js" defer></script>
+    <audio id="cardSound" src="https://assets.mixkit.co/sfx/preview/mixkit-card-dealing-1562.mp3"></audio>
+    <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"></audio>
+</body>
+</html>

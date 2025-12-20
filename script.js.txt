@@ -1,0 +1,1048 @@
+    <script>
+        // Данные карт Таро по отделам
+        const tarotCards = {
+            "Разработка": [
+                {
+                    name: "Маг",
+                    type: "Старший Аркан",
+                    meaning: "В разработке эта карта символизирует уверенное начало нового проекта, использование всех доступных инструментов и технологий для достижения цели.",
+                    advice: "Не бойтесь экспериментировать с новыми технологиями. У вас есть все необходимое для успеха - смело приступайте к реализации идей."
+                },
+                {
+                    name: "Колесо Фортуны",
+                    type: "Старший Аркан",
+                    meaning: "Знак изменений в проекте, переход на новые технологии или изменение требований. Удача будет на вашей стороне в этом цикле.",
+                    advice: "Будьте гибкими и адаптируйтесь к изменениям. Новые возможности открываются именно сейчас."
+                },
+                {
+                    name: "Звезда",
+                    type: "Старший Аркан",
+                    meaning: "Карта вдохновения и инноваций. В разработке это знак креативных решений, удачных находок и ясного видения архитектуры системы.",
+                    advice: "Доверяйте своей интуиции при принятии технических решений. Ваши идеи могут привести к прорыву в проекте."
+                }
+            ],
+            "Аналитика": [
+                {
+                    name: "Верховная Жрица",
+                    type: "Старший Аркан",
+                    meaning: "Символизирует глубину понимания, интуицию и работу с данными. Карта указывает на скрытые паттерны и неочевидные взаимосвязи в информации.",
+                    advice: "Погрузитесь глубже в данные. Истинное понимание приходит через анализ не только явных, но и скрытых факторов."
+                },
+                {
+                    name: "Правосудие",
+                    type: "Старший Аркан",
+                    meaning: "Карта баланса, объективности и логического анализа. Указывает на необходимость взвешенных решений на основе полной информации.",
+                    advice: "Подходите к анализу системно и беспристрастно. Учитывайте все факторы прежде, чем делать выводы."
+                },
+                {
+                    name: "Отшельник",
+                    type: "Старший Аркан",
+                    meaning: "Знак глубокого исследования, сосредоточенности на деталях и поиска коренных причин явлений. Карта советует не спешить с выводами.",
+                    advice: "Уделите время для тщательного анализа. Иногда самые важные инсайты приходят при внимательном изучении мелочей."
+                }
+            ],
+            "Тестирование": [
+                {
+                    name: "Сила",
+                    type: "Старший Аркан",
+                    meaning: "Карта указывает на выявление скрытых дефектов, терпение в поиске багов и уверенность в своих методах тестирования.",
+                    advice: "Проявляйте настойчивость в поиске ошибок. Даже самые скрытые дефекты можно обнаружить при методичном подходе."
+                },
+                {
+                    name: "Шут",
+                    type: "Старший Аркан",
+                    meaning: "Символизирует нестандартный подход к тестированию, исследовательское тестирование и открытость новым методам.",
+                    advice: "Экспериментируйте с подходами к тестированию. Иногда самые интересные баги находятся за пределами стандартных сценариев."
+                },
+                {
+                    name: "Башня",
+                    type: "Старший Аркан",
+                    meaning: "Карта указывает на обнаружение критических дефектов, которые могут привести к серьезным изменениям в проекте.",
+                    advice: "Не бойтесь сообщать о серьезных проблемах, даже если это вызовет значительные изменения в планах."
+                }
+            ],
+            "DEVOPS": [
+                {
+                    name: "Колесница",
+                    type: "Старший Аркан",
+                    meaning: "Символизирует успешную автоматизацию процессов, эффективный CI/CD пайплайн и контроль над инфраструктурой.",
+                    advice: "Продолжайте оптимизировать процессы развертывания. Автоматизация - ключ к эффективности."
+                },
+                {
+                    name: "Император",
+                    type: "Старший Аркан",
+                    meaning: "Карта стабильности, структуры и контроля. Указывает на хорошо организованную инфраструктуру и надежные процессы.",
+                    advice: "Уделяйте внимание безопасности и стабильности инфраструктуры. Планирование предотвращает кризисы."
+                },
+                {
+                    name: "Повешенный",
+                    type: "Старший Аркан",
+                    meaning: "Знак необходимости пересмотреть подходы к инфраструктуре, взглянуть на процессы под новым углом.",
+                    advice: "Иногда нужно остановиться и переосмыслить подходы. Новый взгляд на инфраструктуру может привести к улучшениям."
+                }
+            ],
+            "Базы данных": [
+                {
+                    name: "Иерофант",
+                    type: "Старший Аркан",
+                    meaning: "Карта структуры, организации данных и следования лучшим практикам проектирования баз данных.",
+                    advice: "Следуйте принципам нормализации и оптимизации запросов. Качество данных определяет качество решений."
+                },
+                {
+                    name: "Влюбленные",
+                    type: "Старший Аркан",
+                    meaning: "Символизирует установление связей между таблицами, правильное проектирование отношений и целостность данных.",
+                    advice: "Уделяйте внимание взаимосвязям в данных. Правильно спроектированные отношения - основа эффективной базы."
+                },
+                {
+                    name: "Солнце",
+                    type: "Старший Аркан",
+                    meaning: "Карта указывает на ясность, оптимизацию производительности и успешное решение проблем с данными.",
+                    advice: "Работайте над оптимизацией запросов и индексов. Эффективная база данных - залог скорости приложения."
+                }
+            ],
+            "Руководители проектов": [
+                {
+                    name: "Императрица",
+                    type: "Старший Аркан",
+                    meaning: "Карта плодотворного управления, роста проекта и создания благоприятной среды для команды.",
+                    advice: "Создавайте условия, в которых команда может процветать. Забота о людях так же важна, как и контроль сроков."
+                },
+                {
+                    name: "Возница",
+                    type: "Старший Аркан",
+                    meaning: "Символизирует контроль над ходом проекта, балансирование ограничений и уверенное движение к цели.",
+                    advice: "Держите руку на пульсе проекта, но не мешайте команде работать. Баланс контроля и свободы - ключ к успеху."
+                },
+                {
+                    name: "Мир",
+                    type: "Старший Аркан",
+                    meaning: "Карта успешного завершения проекта, гармонии в команде и достижения поставленных целей.",
+                    advice: "Отмечайте успехи команды и извлекайте уроки из завершенных проектов. Каждый проект обогащает опыт."
+                }
+            ],
+            "Управление персоналом": [
+                {
+                    name: "Солнце",
+                    type: "Старший Аркан",
+                    meaning: "Карта указывает на позитивную атмосферу в коллективе, успешное разрешение конфликтов и мотивацию сотрудников.",
+                    advice: "Создавайте условия для роста и развития сотрудников. Позитивная атмосфера увеличивает продуктивность."
+                },
+                {
+                    name: "Суд",
+                    type: "Старший Аркан",
+                    meaning: "Символизирует переоценку подходов к управлению персоналом, внедрение новых HR-практик и обратную связь.",
+                    advice: "Будьте открыты для обратной связи от сотрудников. Иногда нужно пересмотреть подходы к управлению."
+                },
+                {
+                    name: "Темпа",
+                    type: "Старший Аркан",
+                    meaning: "Карта умеренности, баланса и гармонии. Указывает на необходимость равновесия между требованиями компании и потребностями сотрудников.",
+                    advice: "Стремитесь к балансу интересов компании и сотрудников. Удовлетворенные сотрудники - залог успеха компании."
+                }
+            ],
+            "Сопровождение": [
+                {
+                    name: "Страшный суд",
+                    type: "Старший Аркан",
+                    meaning: "Карта указывает на успешное решение сложных проблем пользователей, восстановление после сбоев и удовлетворенность клиентов.",
+                    advice: "Каждая решенная проблема - это шаг к улучшению сервиса. Учитесь на каждом инциденте."
+                },
+                {
+                    name: "Сила",
+                    type: "Старший Аркан",
+                    meaning: "Символизирует терпение в работе с пользователями, устойчивость к стрессу и способность решать проблемы под давлением.",
+                    advice: "Сохраняйте спокойствие в сложных ситуациях. Ваше терпение и профессионализм помогают пользователям."
+                },
+                {
+                    name: "Звезда",
+                    type: "Старший Аркан",
+                    meaning: "Карта надежды и перспектив. Указывает на улучшение процессов поддержки, внедрение новых инструментов и рост удовлетворенности.",
+                    advice: "Стремитесь к постоянному улучшению сервиса поддерхода. Даже небольшие улучшения имеют значение."
+                }
+            ]
+        };
+
+        // Достижения
+        const achievements = [
+            { id: 1, name: "Первая карта", icon: "fa-star", description: "Вытяните свою первую карту", unlocked: false },
+            { id: 2, name: "Исследователь", icon: "fa-compass", description: "Вытяните карты из 3 разных отделов", unlocked: false },
+            { id: 3, name: "Мудрец", icon: "fa-graduation-cap", description: "Получите 5 карт", unlocked: false },
+            { id: 4, name: "Социальный", icon: "fa-share-alt", description: "Поделитесь картой", unlocked: false },
+            { id: 5, name: "Аналитик", icon: "fa-chart-line", description: "Проверьте статистику", unlocked: false },
+            { id: 6, name: "Настроение", icon: "fa-smile", description: "Отметьте настроение в календаре", unlocked: false },
+            { id: 7, name: "Слушатель", icon: "fa-volume-up", description: "Прослушайте озвучку карты", unlocked: false },
+            { id: 8, name: "Коллекционер", icon: "fa-trophy", description: "Получите все достижения", unlocked: false }
+        ];
+
+        // Глобальные переменные
+        let userName = "";
+        let userDepartment = "";
+        let cardDrawn = false;
+        let currentCard = null;
+        let history = [];
+        let moodCalendar = [];
+        let stats = {
+            totalCards: 0,
+            usersOnline: 1,
+            popularCard: null,
+            activeDept: null,
+            cardsByDept: {}
+        };
+
+        // Элементы DOM
+        const themeToggle = document.getElementById('themeToggle');
+        const userNameInput = document.getElementById('userName');
+        const continueBtn = document.getElementById('continueBtn');
+        const departmentSelect = document.getElementById('department');
+        const startBtn = document.getElementById('startBtn');
+        const tarotDeck = document.getElementById('tarotDeck');
+        const cardContent = document.getElementById('cardContent');
+        const defaultMessage = document.getElementById('defaultMessage');
+        const cardName = document.getElementById('cardName');
+        const cardType = document.getElementById('cardType');
+        const cardMeaning = document.getElementById('cardMeaning');
+        const cardAdvice = document.getElementById('cardAdvice');
+        const userInfo = document.getElementById('userInfo');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const formTitle = document.getElementById('formTitle');
+        const nameForm = document.getElementById('nameForm');
+        const departmentForm = document.getElementById('departmentForm');
+        const deckSection = document.getElementById('deckSection');
+        const sharingButtons = document.getElementById('sharingButtons');
+        const videoOverlay = document.getElementById('videoOverlay');
+        const officeVideo = document.getElementById('officeVideo');
+        const closeVideo = document.getElementById('closeVideo');
+        const errorOverlay = document.getElementById('errorOverlay');
+        const errorVideo = document.getElementById('errorVideo');
+        const closeErrorVideo = document.getElementById('closeErrorVideo');
+        const historyContainer = document.getElementById('historyContainer');
+        const achievementsContainer = document.getElementById('achievementsContainer');
+        const moodCalendarEl = document.getElementById('moodCalendar');
+        const statsGrid = document.getElementById('statsGrid');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicStatus = document.getElementById('musicStatus');
+        const musicVolume = document.getElementById('musicVolume');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const cardSound = document.getElementById('cardSound');
+        const clickSound = document.getElementById('clickSound');
+        const shareBtn = document.getElementById('shareBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const voiceBtn = document.getElementById('voiceBtn');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const cardModalOverlay = document.getElementById('cardModalOverlay');
+        const cardModalContent = document.getElementById('cardModalContent');
+        const closeModal = document.getElementById('closeModal');
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Восстановление данных из localStorage
+            loadFromLocalStorage();
+            
+            // Инициализация аудио
+            backgroundMusic.volume = musicVolume.value / 100;
+            backgroundMusic.play().catch(e => console.log("Автовоспроизведение музыки заблокировано браузером"));
+            
+            // Инициализация календаря настроений
+            initMoodCalendar();
+            
+            // Инициализация достижений
+            initAchievements();
+            
+            // Инициализация статистики
+            updateStats();
+            
+            // Обработчики событий
+            setupEventListeners();
+            
+            // Создание снежинок для новогодней темы
+            createSnowflakes();
+            
+            // Показываем кнопку выхода, если пользователь авторизован
+            if (userName) {
+                logoutBtn.style.display = 'block';
+            }
+        });
+
+        // Загрузка данных из localStorage
+        function loadFromLocalStorage() {
+            const savedUser = localStorage.getItem('tarotUser');
+            const savedHistory = localStorage.getItem('tarotHistory');
+            const savedMood = localStorage.getItem('tarotMood');
+            const savedStats = localStorage.getItem('tarotStats');
+            const savedAchievements = localStorage.getItem('tarotAchievements');
+            const savedCurrentCard = localStorage.getItem('currentCard');
+            
+            if (savedUser) {
+                const user = JSON.parse(savedUser);
+                userName = user.name;
+                userDepartment = user.department;
+                
+                // Пропускаем форму, если пользователь уже зарегистрирован
+                nameForm.style.display = 'none';
+                departmentForm.style.display = 'none';
+                deckSection.style.display = 'block';
+                formTitle.textContent = `Добро пожаловать, ${userName}!`;
+                userInfo.innerHTML = `${userName} | ${userDepartment}`;
+                
+                // Проверяем, вытягивал ли пользователь карту
+                const hasDrawn = localStorage.getItem('hasDrawnCard');
+                if (hasDrawn === 'true') {
+                    cardDrawn = true;
+                    
+                    // Восстанавливаем текущую карту
+                    if (savedCurrentCard) {
+                        currentCard = JSON.parse(savedCurrentCard);
+                        showCard(currentCard);
+                        sharingButtons.style.display = 'flex';
+                    }
+                }
+            }
+            
+            if (savedHistory) {
+                history = JSON.parse(savedHistory);
+                updateHistoryDisplay();
+            }
+            
+            if (savedMood) {
+                moodCalendar = JSON.parse(savedMood);
+                updateMoodCalendarDisplay();
+            }
+            
+            if (savedStats) {
+                stats = JSON.parse(savedStats);
+            }
+            
+            if (savedAchievements) {
+                const unlockedAchievements = JSON.parse(savedAchievements);
+                achievements.forEach(ach => {
+                    if (unlockedAchievements.includes(ach.id)) {
+                        ach.unlocked = true;
+                    }
+                });
+            }
+        }
+
+        // Настройка обработчиков событий
+        function setupEventListeners() {
+            // Переключение темы
+            themeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.add('new-year-theme');
+                    // Активируем снежинки
+                    activateSnowflakes();
+                } else {
+                    document.body.classList.remove('new-year-theme');
+                    // Деактивируем снежинки
+                    deactivateSnowflakes();
+                }
+                // Обновляем статистику для применения новой темы
+                updateStatsDisplay();
+            });
+            
+            // Кнопка "Продолжить"
+            continueBtn.addEventListener('click', function() {
+                if (userNameInput.value.trim() === "") {
+                    alert("Пожалуйста, введите ваше имя");
+                    return;
+                }
+                
+                // Проверка на кириллицу
+                const cyrillicRegex = /^[А-Яа-яЁё\s]+$/;
+                if (!cyrillicRegex.test(userNameInput.value.trim())) {
+                    alert("Имя должно содержать только русские буквы");
+                    return;
+                }
+                
+                userName = userNameInput.value.trim();
+                nameForm.style.display = 'none';
+                departmentForm.style.display = 'block';
+                formTitle.textContent = "Выбери своё направление!";
+                playSound(clickSound);
+            });
+            
+            // Кнопка "Начать"
+            startBtn.addEventListener('click', function() {
+                if (departmentSelect.value === "") {
+                    alert("Пожалуйста, выберите ваше направление");
+                    return;
+                }
+                
+                userDepartment = departmentSelect.value;
+                
+                // Сохраняем пользователя
+                localStorage.setItem('tarotUser', JSON.stringify({
+                    name: userName,
+                    department: userDepartment
+                }));
+                
+                // Обновляем отображение
+                userInfo.innerHTML = `${userName} | ${userDepartment}`;
+                departmentForm.style.display = 'none';
+                deckSection.style.display = 'block';
+                formTitle.textContent = `Добро пожаловать, ${userName}!`;
+                logoutBtn.style.display = 'block';
+                
+                // Показываем видео
+                showVideo();
+                playSound(clickSound);
+            });
+            
+            // Кнопка выхода
+            logoutBtn.addEventListener('click', function() {
+                if (confirm("Вы уверены, что хотите выйти? Ваша текущая карта и история будут сохранены.")) {
+                    // Сбрасываем состояние
+                    nameForm.style.display = 'block';
+                    departmentForm.style.display = 'none';
+                    deckSection.style.display = 'none';
+                    formTitle.textContent = "Представьтесь, пожалуйста!";
+                    userInfo.innerHTML = "";
+                    logoutBtn.style.display = 'none';
+                    sharingButtons.style.display = 'none';
+                    cardContent.style.display = 'none';
+                    defaultMessage.style.display = 'block';
+                    
+                    // Сбрасываем переменные
+                    userName = "";
+                    userDepartment = "";
+                    
+                    // Очищаем localStorage для пользователя, но сохраняем историю
+                    localStorage.removeItem('tarotUser');
+                    localStorage.removeItem('hasDrawnCard');
+                    localStorage.removeItem('currentCard');
+                    
+                    playSound(clickSound);
+                }
+            });
+            
+            // Клик по колоде карт
+            tarotDeck.addEventListener('click', function() {
+                if (cardDrawn) {
+                    showError();
+                    return;
+                }
+                
+                drawCard();
+                playSound(cardSound);
+            });
+            
+            // Закрытие основного видео
+            closeVideo.addEventListener('click', function() {
+                hideVideo();
+                playSound(clickSound);
+            });
+            
+            // Закрытие видео ошибки
+            closeErrorVideo.addEventListener('click', function() {
+                hideErrorVideo();
+                playSound(clickSound);
+            });
+            
+            // Обработка окончания видео
+            officeVideo.addEventListener('ended', function() {
+                hideVideo();
+            });
+            
+            errorVideo.addEventListener('ended', function() {
+                hideErrorVideo();
+            });
+            
+            // Аудио контролы
+            musicToggle.addEventListener('click', function() {
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play();
+                    musicStatus.textContent = "Музыка Вкл";
+                } else {
+                    backgroundMusic.pause();
+                    musicStatus.textContent = "Музыка Выкл";
+                }
+                playSound(clickSound);
+            });
+            
+            musicVolume.addEventListener('input', function() {
+                backgroundMusic.volume = this.value / 100;
+            });
+            
+            // Устанавливаем громкость для эффектов на половину громкости музыки
+            cardSound.volume = 0.5;
+            clickSound.volume = 0.5;
+            
+            // Кнопки шаринга
+            shareBtn.addEventListener('click', function() {
+                shareCard();
+                playSound(clickSound);
+            });
+            
+            saveBtn.addEventListener('click', function() {
+                saveCard();
+                playSound(clickSound);
+            });
+            
+            voiceBtn.addEventListener('click', function() {
+                speakCard();
+                playSound(clickSound);
+            });
+            
+            // Вкладки
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Убираем активный класс у всех вкладок
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Добавляем активный класс текущей вкладке
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // Если открыли статистику - обновляем ее
+                    if (tabId === 'stats') {
+                        updateStats();
+                    }
+                    
+                    playSound(clickSound);
+                });
+            });
+            
+            // Закрытие модального окна
+            closeModal.addEventListener('click', function() {
+                cardModalOverlay.style.display = 'none';
+                playSound(clickSound);
+            });
+            
+            // Закрытие модального окна при клике на оверлей
+            cardModalOverlay.addEventListener('click', function(e) {
+                if (e.target === cardModalOverlay) {
+                    cardModalOverlay.style.display = 'none';
+                }
+            });
+        }
+
+        // Показать видео
+        function showVideo() {
+            videoOverlay.style.display = 'flex';
+            officeVideo.play();
+            
+            // Сброс видео до начала
+            officeVideo.currentTime = 0;
+            
+            // Добавляем обработчик окончания видео
+            officeVideo.onended = function() {
+                hideVideo();
+            };
+        }
+
+        // Скрыть видео
+        function hideVideo() {
+            videoOverlay.style.display = 'none';
+            officeVideo.pause();
+            officeVideo.currentTime = 0;
+        }
+
+        // Показать ошибку
+        function showError() {
+            errorOverlay.style.display = 'flex';
+            errorVideo.play();
+            
+            // Сброс видео до начала
+            errorVideo.currentTime = 0;
+            
+            // Добавляем обработчик окончания видео
+            errorVideo.onended = function() {
+                hideErrorVideo();
+            };
+        }
+
+        // Скрыть видео ошибки
+        function hideErrorVideo() {
+            errorOverlay.style.display = 'none';
+            errorVideo.pause();
+            errorVideo.currentTime = 0;
+        }
+
+        // Вытянуть карту
+        function drawCard() {
+            cardDrawn = true;
+            localStorage.setItem('hasDrawnCard', 'true');
+            
+            // Получаем карты для текущего отдела
+            const departmentCards = tarotCards[userDepartment];
+            
+            // Выбираем случайную карту
+            const randomIndex = Math.floor(Math.random() * departmentCards.length);
+            currentCard = departmentCards[randomIndex];
+            currentCard.department = userDepartment;
+            currentCard.timestamp = new Date().toLocaleString();
+            
+            // Сохраняем текущую карту
+            localStorage.setItem('currentCard', JSON.stringify(currentCard));
+            
+            // Показываем карту
+            showCard(currentCard);
+            
+            // Добавляем в историю
+            history.unshift({
+                ...currentCard,
+                timestamp: new Date().toLocaleString()
+            });
+            
+            // Ограничиваем историю 5 последними картами
+            if (history.length > 5) {
+                history = history.slice(0, 5);
+            }
+            
+            // Сохраняем историю
+            localStorage.setItem('tarotHistory', JSON.stringify(history));
+            
+            // Обновляем отображение истории
+            updateHistoryDisplay();
+            
+            // Обновляем статистику
+            updateStats();
+            
+            // Проверяем достижения
+            checkAchievements();
+            
+            // Показываем кнопки шаринга
+            sharingButtons.style.display = 'flex';
+        }
+
+        // Показать карту
+        function showCard(card) {
+            defaultMessage.style.display = 'none';
+            cardContent.style.display = 'block';
+            
+            cardName.textContent = card.name;
+            cardType.textContent = card.type;
+            cardMeaning.textContent = card.meaning;
+            cardAdvice.textContent = card.advice;
+        }
+
+        // Обновить отображение истории
+        function updateHistoryDisplay() {
+            historyContainer.innerHTML = '';
+            
+            if (history.length === 0) {
+                historyContainer.innerHTML = '<div class="empty-history">Вы еще не вытягивали карты</div>';
+                return;
+            }
+            
+            history.forEach((card, index) => {
+                const historyCard = document.createElement('div');
+                historyCard.className = 'history-card';
+                historyCard.innerHTML = `
+                    <div class="history-card-name">${card.name}</div>
+                    <div class="history-card-department">${card.department}</div>
+                    <div class="history-card-time">${card.timestamp}</div>
+                `;
+                
+                historyCard.addEventListener('click', function() {
+                    showCardModal(card, index);
+                    playSound(clickSound);
+                });
+                
+                historyContainer.appendChild(historyCard);
+            });
+        }
+
+        // Показать модальное окно с картой
+        function showCardModal(card, index) {
+            cardModalContent.innerHTML = `
+                <div class="card-header">
+                    <div class="card-name">${card.name}</div>
+                    <div class="card-type">${card.type}</div>
+                </div>
+                <div class="card-meaning">
+                    <strong>Значение:</strong> <span>${card.meaning}</span>
+                </div>
+                <div class="card-advice">
+                    <strong>Совет:</strong> <span>${card.advice}</span>
+                </div>
+                <div style="margin-top: 20px; color: #666; font-size: 14px;">
+                    <strong>Отдел:</strong> ${card.department}<br>
+                    <strong>Получено:</strong> ${card.timestamp}<br>
+                    <strong>Номер в истории:</strong> ${index + 1}
+                </div>
+            `;
+            
+            cardModalOverlay.style.display = 'flex';
+        }
+
+        // Инициализация достижений
+        function initAchievements() {
+            achievementsContainer.innerHTML = '';
+            
+            achievements.forEach(achievement => {
+                const achievementEl = document.createElement('div');
+                achievementEl.className = `achievement ${achievement.unlocked ? 'unlocked' : ''}`;
+                achievementEl.innerHTML = `
+                    <i class="fas ${achievement.icon}"></i>
+                    <div class="achievement-tooltip">
+                        <strong>${achievement.name}</strong><br>
+                        ${achievement.description}
+                    </div>
+                `;
+                
+                achievementsContainer.appendChild(achievementEl);
+            });
+        }
+
+        // Проверка достижений
+        function checkAchievements() {
+            let unlockedNew = false;
+            
+            // Первая карта
+            if (!achievements[0].unlocked && history.length >= 1) {
+                achievements[0].unlocked = true;
+                unlockedNew = true;
+            }
+            
+            // Исследователь (карты из 3 разных отделов)
+            if (!achievements[1].unlocked) {
+                const uniqueDepartments = [...new Set(history.map(card => card.department))];
+                if (uniqueDepartments.length >= 3) {
+                    achievements[1].unlocked = true;
+                    unlockedNew = true;
+                }
+            }
+            
+            // Мудрец (5 карт)
+            if (!achievements[2].unlocked && history.length >= 5) {
+                achievements[2].unlocked = true;
+                unlockedNew = true;
+            }
+            
+            // Аналитик (всегда разблокируется при просмотре статистики)
+            
+            // Сохраняем разблокированные достижения
+            if (unlockedNew) {
+                const unlockedIds = achievements.filter(a => a.unlocked).map(a => a.id);
+                localStorage.setItem('tarotAchievements', JSON.stringify(unlockedIds));
+                initAchievements();
+            }
+        }
+
+        // Инициализация календаря настроений
+        function initMoodCalendar() {
+            // Создаем 30 дней
+            for (let i = 0; i < 30; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() - (29 - i));
+                
+                // Проверяем, есть ли сохраненное настроение для этого дня
+                const savedMood = moodCalendar.find(m => {
+                    const moodDate = new Date(m.date);
+                    return moodDate.toDateString() === date.toDateString();
+                });
+                
+                moodCalendar.push({
+                    date: date.toISOString(),
+                    mood: savedMood ? savedMood.mood : null,
+                    note: savedMood ? savedMood.note : ""
+                });
+            }
+            
+            updateMoodCalendarDisplay();
+        }
+
+        // Обновить отображение календаря настроений
+        function updateMoodCalendarDisplay() {
+            moodCalendarEl.innerHTML = '';
+            
+            const today = new Date().toDateString();
+            
+            moodCalendar.forEach(day => {
+                const date = new Date(day.date);
+                const dayNumber = date.getDate();
+                const isToday = date.toDateString() === today;
+                
+                const moodDay = document.createElement('div');
+                moodDay.className = `mood-day ${day.mood ? `mood-${day.mood}` : ''} ${isToday ? 'mood-today' : ''}`;
+                moodDay.textContent = dayNumber;
+                
+                // Создаем подсказку
+                const tooltip = document.createElement('div');
+                tooltip.className = 'mood-tooltip';
+                
+                let moodText = "Не отмечено";
+                if (day.mood === "good") moodText = "Хорошее настроение";
+                else if (day.mood === "neutral") moodText = "Нейтральное настроение";
+                else if (day.mood === "bad") moodText = "Плохое настроение";
+                
+                tooltip.textContent = `${date.toLocaleDateString('ru-RU')}: ${moodText}`;
+                moodDay.appendChild(tooltip);
+                
+                // Обработчик клика для отметки настроения
+                moodDay.addEventListener('click', function() {
+                    if (!day.mood) {
+                        day.mood = "good";
+                    } else if (day.mood === "good") {
+                        day.mood = "neutral";
+                    } else if (day.mood === "neutral") {
+                        day.mood = "bad";
+                    } else {
+                        day.mood = null;
+                    }
+                    
+                    // Сохраняем в localStorage
+                    localStorage.setItem('tarotMood', JSON.stringify(moodCalendar.filter(m => m.mood !== null)));
+                    
+                    // Обновляем отображение
+                    updateMoodCalendarDisplay();
+                    
+                    // Проверяем достижение "Настроение"
+                    if (!achievements[5].unlocked) {
+                        achievements[5].unlocked = true;
+                        const unlockedIds = achievements.filter(a => a.unlocked).map(a => a.id);
+                        localStorage.setItem('tarotAchievements', JSON.stringify(unlockedIds));
+                        initAchievements();
+                    }
+                    
+                    playSound(clickSound);
+                });
+                
+                moodCalendarEl.appendChild(moodDay);
+            });
+        }
+
+        // Обновить статистику
+        function updateStats() {
+            stats.totalCards = history.length;
+            stats.usersOnline = Math.floor(Math.random() * 10) + 1; // Имитация пользователей онлайн
+            
+            // Определяем самую популярную карту
+            if (history.length > 0) {
+                const cardCounts = {};
+                history.forEach(card => {
+                    cardCounts[card.name] = (cardCounts[card.name] || 0) + 1;
+                });
+                
+                let maxCount = 0;
+                let popular = null;
+                
+                for (const [cardName, count] of Object.entries(cardCounts)) {
+                    if (count > maxCount) {
+                        maxCount = count;
+                        popular = cardName;
+                    }
+                }
+                
+                stats.popularCard = popular;
+            }
+            
+            // Определяем самый активный отдел
+            if (history.length > 0) {
+                const deptCounts = {};
+                history.forEach(card => {
+                    deptCounts[card.department] = (deptCounts[card.department] || 0) + 1;
+                });
+                
+                let maxCount = 0;
+                let activeDept = null;
+                
+                for (const [dept, count] of Object.entries(deptCounts)) {
+                    if (count > maxCount) {
+                        maxCount = count;
+                        activeDept = dept;
+                    }
+                }
+                
+                stats.activeDept = activeDept;
+            }
+            
+            // Сохраняем статистику
+            localStorage.setItem('tarotStats', JSON.stringify(stats));
+            
+            // Обновляем отображение
+            updateStatsDisplay();
+            
+            // Проверяем достижение "Аналитик"
+            if (!achievements[4].unlocked) {
+                achievements[4].unlocked = true;
+                const unlockedIds = achievements.filter(a => a.unlocked).map(a => a.id);
+                localStorage.setItem('tarotAchievements', JSON.stringify(unlockedIds));
+                initAchievements();
+            }
+        }
+
+        // Обновить отображение статистики
+        function updateStatsDisplay() {
+            statsGrid.innerHTML = '';
+            
+            // Общее количество карт
+            const totalCard = document.createElement('div');
+            totalCard.className = 'stat-card';
+            totalCard.innerHTML = `
+                <div class="stat-value">${stats.totalCards}</div>
+                <div class="stat-label">Всего вытянуто карт</div>
+            `;
+            statsGrid.appendChild(totalCard);
+            
+            // Пользователи онлайн
+            const onlineCard = document.createElement('div');
+            onlineCard.className = 'stat-card';
+            onlineCard.innerHTML = `
+                <div class="stat-value">${stats.usersOnline}</div>
+                <div class="stat-label">Пользователей онлайн</div>
+            `;
+            statsGrid.appendChild(onlineCard);
+            
+            // Самая популярная карта
+            const popularCard = document.createElement('div');
+            popularCard.className = 'stat-card';
+            popularCard.innerHTML = `
+                <div class="stat-value">${stats.popularCard || "-"}</div>
+                <div class="stat-label">Самая популярная карта</div>
+            `;
+            statsGrid.appendChild(popularCard);
+            
+            // Самый активный отдел
+            const activeDept = document.createElement('div');
+            activeDept.className = 'stat-card';
+            activeDept.innerHTML = `
+                <div class="stat-value">${stats.activeDept || "-"}</div>
+                <div class="stat-label">Самый активный отдел</div>
+            `;
+            statsGrid.appendChild(activeDept);
+            
+            // Количество дней с настроением
+            const moodDays = moodCalendar.filter(day => day.mood !== null).length;
+            const moodCard = document.createElement('div');
+            moodCard.className = 'stat-card';
+            moodCard.innerHTML = `
+                <div class="stat-value">${moodDays}</div>
+                <div class="stat-label">Дней с настроением</div>
+            `;
+            statsGrid.appendChild(moodCard);
+            
+            // Количество достижений
+            const unlockedAchievements = achievements.filter(a => a.unlocked).length;
+            const achievementsCard = document.createElement('div');
+            achievementsCard.className = 'stat-card';
+            achievementsCard.innerHTML = `
+                <div class="stat-value">${unlockedAchievements}/${achievements.length}</div>
+                <div class="stat-label">Достижений получено</div>
+            `;
+            statsGrid.appendChild(achievementsCard);
+        }
+
+        // Поделиться картой
+        function shareCard() {
+            const text = `Моя карта дня: ${currentCard.name} - ${currentCard.type}. ${currentCard.meaning.substring(0, 100)}...`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Моя карта дня',
+                    text: text,
+                    url: window.location.href
+                }).then(() => {
+                    console.log('Успешно поделились');
+                }).catch(error => {
+                    console.log('Ошибка при шеринге:', error);
+                    copyToClipboard(text);
+                });
+            } else {
+                copyToClipboard(text);
+            }
+            
+            // Разблокируем достижение "Социальный"
+            if (!achievements[3].unlocked) {
+                achievements[3].unlocked = true;
+                const unlockedIds = achievements.filter(a => a.unlocked).map(a => a.id);
+                localStorage.setItem('tarotAchievements', JSON.stringify(unlockedIds));
+                initAchievements();
+            }
+        }
+
+        // Копировать в буфер обмена
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Текст скопирован в буфер обмена!');
+            }).catch(err => {
+                console.error('Ошибка при копировании: ', err);
+            });
+        }
+
+        // Сохранить карту
+        function saveCard() {
+            // В реальном приложении здесь могло бы быть сохранение в базу данных
+            // или экспорт в файл
+            alert('Карта сохранена в вашей истории!');
+        }
+
+        // Озвучить карту
+        function speakCard() {
+            const text = `${currentCard.name}. ${currentCard.type}. ${currentCard.meaning}. Совет: ${currentCard.advice}`;
+            
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ru-RU';
+                utterance.rate = 1.0;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('Ваш браузер не поддерживает синтез речи');
+            }
+            
+            // Разблокируем достижение "Слушатель"
+            if (!achievements[6].unlocked) {
+                achievements[6].unlocked = true;
+                const unlockedIds = achievements.filter(a => a.unlocked).map(a => a.id);
+                localStorage.setItem('tarotAchievements', JSON.stringify(unlockedIds));
+                initAchievements();
+            }
+        }
+
+        // Воспроизвести звук
+        function playSound(sound) {
+            sound.currentTime = 0;
+            sound.play();
+        }
+
+        // Создание снежинок для новогодней темы
+        function createSnowflakes() {
+            for (let i = 0; i < 50; i++) {
+                createSnowflake();
+            }
+        }
+
+        // Создать одну снежинку
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '❄';
+            
+            // Случайная позиция
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            
+            // Случайный размер
+            const size = Math.random() * 15 + 5;
+            snowflake.style.fontSize = size + 'px';
+            
+            // Случайная скорость
+            const duration = Math.random() * 10 + 10;
+            snowflake.style.animationDuration = duration + 's';
+            
+            // Случайная задержка
+            snowflake.style.animationDelay = Math.random() * 10 + 's';
+            
+            document.body.appendChild(snowflake);
+        }
+
+        // Активировать снежинки
+        function activateSnowflakes() {
+            const snowflakes = document.querySelectorAll('.snowflake');
+            snowflakes.forEach(snowflake => {
+                snowflake.style.display = 'block';
+            });
+        }
+
+        // Деактивировать снежинки
+        function deactivateSnowflakes() {
+            const snowflakes = document.querySelectorAll('.snowflake');
+            snowflakes.forEach(snowflake => {
+                snowflake.style.display = 'none';
+            });
+        }
+    </script>
